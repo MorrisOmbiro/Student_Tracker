@@ -10,24 +10,42 @@ export default class CreateCourse extends Component {
     };
   }
 
-  onChangeStudentName = (e) => {
+  onChangeCourseName = (e) => {
     this.setState({ courseName: e.target.value });
-    
-
   };
-  
+
+  onSubmit = (e) => {
+    e.preventDefault(); 
+
+    const course = {
+        courseName: this.state.courseName
+    }
+
+    console.log(course);    
+
+    axios.post('http://localhost:5000/courses/add', course)
+        .then(res => console.log(res.data))
+
+    // clear input field 
+    this.setState({
+        courseName: ''
+    })
+  };
+
+
   render() {
-    return (
+    return (    
       <div>
         <h3>Create Course</h3>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>CourseName: </label>
             <input
               type="text"
+              required
               className="form-control"
-              value={this.state.studentName}
-              onChange={this.onChangeStudentName}
+              value={this.state.courseName}
+              onChange={this.onChangeCourseName}
             />
           </div>
           <div className="form-group">
