@@ -9,7 +9,8 @@ router.route("/").get((req, res) => {
 
 router.route("/add").post((req, res) => {
   const studentName = req.body.studentName;
-  const newStudent = new Student({ studentName });
+  const gradeLevel = Number(req.body.gradeLevel);
+  const newStudent = new Student({ studentName, gradeLevel });
 
   newStudent
     .save()
@@ -27,7 +28,8 @@ router.route("/:id").get((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Student.findById(req.params.id).then((student)=> {
         student.studentName = req.body.studentName
-
+        student.gradeLevel = req.body.gradeLevel 
+        
         student.save()
             .then(() => res.json("Student Updated"))
             .catch(() => res.status(400).json("Error: " + err))

@@ -5,7 +5,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const studentSchema = new Schema({
-    studentName: {type: String, required: true}
+    studentName: {type: String, required: true},
+    gradeLevel: {type: Number, required: true}
 },{
     timestamps: true
 })

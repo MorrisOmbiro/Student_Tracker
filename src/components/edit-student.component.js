@@ -7,6 +7,7 @@ export default class EditStudent extends Component {
 
     this.state = {
       studentName: "",
+      gradeLevel: 0, 
     };
   }
 
@@ -15,6 +16,7 @@ export default class EditStudent extends Component {
       .then((res) => {
         this.setState({
           studentName: res.data.studentName,
+          gradeLevel: res.data.gradeLevel
         });
       })
       .catch((error) => console.log(error));
@@ -26,11 +28,16 @@ export default class EditStudent extends Component {
     this.setState({ studentName: e.target.value });
   };
 
+  onChangeGradeLevel = (e) => {
+    this.setState({gradeLevel: e.target.value })
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
     const student = {
       studentName: this.state.studentName,
+      gradeLevel: this.state.gradeLevel,
     };
 
     console.log(student);
@@ -55,8 +62,18 @@ export default class EditStudent extends Component {
               type="text"
               required
               className="form-control"
-              value={this.state.onChangeStudentName}
+              value={this.state.studentName}
               onChange={this.onChangeStudentName}
+            />
+          </div>
+          <div className="form-group">
+            <label>Grade Level: </label>
+            <input
+              type="number"
+              required
+              className="form-control"
+              value={this.state.gradeLevel}
+              onChange={this.onChangeGradeLevel}
             />
           </div>
           <div className="form-group">

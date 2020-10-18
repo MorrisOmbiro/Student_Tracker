@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Student = props => (
     <tr>
-        <td>{props.student.studentName}</td>
+        <td>{props.student.studentName} | GRADE: {props.student.gradeLevel}</td>
         <td>
             <Link to={"/edit/" + props.student._id}>edit</Link>
         </td>
