@@ -1,7 +1,7 @@
+import axios from "axios";
 import React, { Component } from "react";
-import axios from 'axios'
 
-export default class CreateCourse extends Component {
+export default class EditCourse extends Component {
   constructor(props) {
     super(props);
 
@@ -10,34 +10,42 @@ export default class CreateCourse extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get("http://localhost:5000/courses/" + this.props.match.params.id)
+      .then((res) => {
+        this.setState({
+          courseName: res.data.courseName,
+        });
+      })
+      .catch((error) => console.log(error));
+
+    // edit course here
+  }
+
   onChangeCourseName = (e) => {
     this.setState({ courseName: e.target.value });
   };
 
   onSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const course = {
-        courseName: this.state.courseName
-    }
+      courseName: this.state.courseName,
+    };
 
-    console.log(course);    
+    console.log(course);
 
-    axios.post('http://localhost:5000/courses/add', course)
-        .then(res => console.log(res.data))
-
-    // switch to courses list 
+    axios.post("http://localhost:5000/courses/update/" + this.props.match.params.id, course)
+      .then((res) => console.log(res.data));
     window.location = "/courses";
   };
 
-
   render() {
-    return (    
+    return (
       <div>
-        <h3>Create Course</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>CourseName: </label>
+            <label>Course Name: </label>
             <input
               type="text"
               required
@@ -49,7 +57,7 @@ export default class CreateCourse extends Component {
           <div className="form-group">
             <input
               type="submit"
-              value="Create Course"
+              value="Edit Course Name"
               className="btn btn-primary"
             />
           </div>

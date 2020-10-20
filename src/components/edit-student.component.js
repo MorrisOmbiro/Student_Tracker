@@ -42,11 +42,7 @@ export default class EditStudent extends Component {
 
     console.log(student);
 
-    axios
-      .post(
-        "http://localhost:5000/students/update/" + this.props.match.params.id,
-        student
-      )
+    axios.post("http://localhost:5000/students/update/" + this.props.match.params.id, student)
       .then((res) => console.log(res.data));
 
     window.location = "/";
@@ -57,7 +53,7 @@ export default class EditStudent extends Component {
       <div>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>studentName: </label>
+            <label>Student Name: </label>
             <input
               type="text"
               required

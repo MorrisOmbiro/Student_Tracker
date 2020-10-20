@@ -32,7 +32,7 @@ router.route('/update/:id').post((req, res) => {
 
         student.save()
             .then(() => res.json("Student Updated"))
-            .catch(() => res.status(400).json("Error: " + err))
+            .catch((err) => res.status(400).json("Error: " + err))
     }).catch(err => res.status(400).json('Error: ' + err))
 })
 
