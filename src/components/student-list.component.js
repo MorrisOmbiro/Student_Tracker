@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import {Button} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Student = props => (
     <tr>
         <td>{props.student.studentName} | GRADE: {props.student.gradeLevel}</td>
         <td>
-            <Link to={"/edit/" + props.student._id}>edit</Link>
+            <Link to={"/edit/" + props.student._id}>edit</Link> | {' '} 
+            <Button href ="#" variant='outline-danger' onClick={() => {props.deleteStudent(props.student._id)}}>delete</Button>
         </td>
     </tr>
 )
 
-export default class CourseList extends Component {
+export default class StudentList extends Component {
   constructor(props) {
     super(props);
 
@@ -25,9 +29,19 @@ export default class CourseList extends Component {
       .catch((error) => console.log(error));
   }
 
+  deleteStudent = (id) => {
+    axios.delete("http://localhost:5000/students/" + id)
+      .then(response => console.log(response.data))
+
+    //refresh the screen 
+    this.setState({
+      students: this.state.students.filter(el => el._id !== id)
+    })
+  }
+
   studentList = () => {
     return this.state.students.map(currentStudent => {
-        return <Student student = {currentStudent} key={currentStudent._id} />
+        return <Student student = {currentStudent} deleteStudent = {this.deleteStudent} key={currentStudent._id} />
     })    
   }
 

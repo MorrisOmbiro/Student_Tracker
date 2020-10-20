@@ -7,6 +7,7 @@ export default class CreateStudent extends Component {
     this.state = {
       studentName: "",
       gradeLevel: "", 
+      courseList: [],
       students: []
     };
   }

@@ -29,10 +29,18 @@ router.route('/update/:id').post((req, res) => {
     Student.findById(req.params.id).then((student)=> {
         student.studentName = req.body.studentName
         student.gradeLevel = req.body.gradeLevel 
-        
+
         student.save()
             .then(() => res.json("Student Updated"))
             .catch(() => res.status(400).json("Error: " + err))
     }).catch(err => res.status(400).json('Error: ' + err))
 })
+
+// delete the specific student by id 
+router.route('/:id').delete((req, res) => {
+  Student.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Student Deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
+})
+
 module.exports = router; 

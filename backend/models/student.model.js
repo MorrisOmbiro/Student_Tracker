@@ -6,7 +6,8 @@ const Schema = mongoose.Schema
 
 const studentSchema = new Schema({
     studentName: {type: String, required: true},
-    gradeLevel: {type: Number, required: true}
+    gradeLevel: {type: Number, required: true},
+    courseList: {type: Array, required: true},
 },{
     timestamps: true
 })
