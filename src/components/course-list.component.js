@@ -8,7 +8,7 @@ const Course = (props) => (
   <tr>
     <td>{props.course.courseName}</td>
     <td>
-      <Link to={"/edit/" + props.course._id}>edit</Link> |{" "}
+      <Link to={"/edit/" + props.course._id + "/course"}>edit</Link> |{" "}
       {console.log(props.course._id)}
       <Button href="#" variant="outline-danger" onClick={() => { props.deleteCourse(props.course._id);}}>delete</Button>
     </td>

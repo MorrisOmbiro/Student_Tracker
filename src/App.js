@@ -18,8 +18,8 @@ export default function App() {
         <br />
         <Route path="/" exact component={StudentList} />
         <Route path="/courses" exact component={CourseList} />
-        <Route path="/edit/:id" component={EditStudent} />
-        <Route path="/edit/:id" component={EditCourse} />
+        <Route key="edit-student" exact path="/edit/:id" component={EditStudent} />
+        <Route key="edit-course" exact path="/edit/:id/course" component={EditCourse} />
         <Route path="/create" component={CreateStudent} />
         <Route path="/course" component={CreateCourse} />
       </div>
