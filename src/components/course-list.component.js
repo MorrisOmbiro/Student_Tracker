@@ -49,9 +49,9 @@ export default class CourseList extends Component {
       <div>
         <h3>courses</h3>
         <table className="table">
-          <thead className="thead-dark">
+          <thead className="thead-light">
             <tr>
-              <th>course</th>
+              <th>Course</th>
               <th>Actions</th>
             </tr>
           </thead>

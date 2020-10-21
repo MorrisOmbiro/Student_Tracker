@@ -52,7 +52,7 @@ export default class StudentList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>student</th>
+              <th>Student</th>
               <th>Actions</th>
             </tr>
           </thead>
