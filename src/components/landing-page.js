@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Image} from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import "./static/css/landingpage.css"
 
 
@@ -15,6 +15,7 @@ export default class LandingPage extends Component {
       <div>
         <Header />
         <Container className="bodyText">
+        
           <div className="iconText">
             <Row>
               <Col xs={12} md={8}>
@@ -32,6 +33,7 @@ export default class LandingPage extends Component {
           </Col>
         </Row>
         </div>
+        
         </Container>
       </div>
     );

@@ -33,10 +33,12 @@ connection.once("open", () => {
 // require files
 const studentRouter = require("./routes/students");
 const courseRouter = require("./routes/courses");
+const userRouter = require("./routes/users")
 
 // use the files
 app.use("/students", studentRouter);
 app.use("/courses", courseRouter);
+app.use("/users", userRouter);
 
 // start the server and listen on the PORT
 app.listen(port, () => {

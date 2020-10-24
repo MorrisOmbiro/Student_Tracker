@@ -10,6 +10,8 @@ import EditStudent from "./components/edit-student.component";
 import EditCourse from "./components/edit-course.component";
 import CreateCourse from "./components/create-course.component";
 import CreateStudent from "./components/create-student.component";
+import Login from "./components/login";
+import Signup from "./components/signup";
 
 export default function App() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
         <Route key="edit-course" exact path="/edit/:id/course" component={EditCourse} />
         <Route path="/create" component={CreateStudent} />
         <Route path="/course" component={CreateCourse} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         </div>
       </div>
     </Router>
