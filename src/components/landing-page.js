@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 import "./static/css/landingpage.css"
 
-
 export default class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -10,10 +9,8 @@ export default class LandingPage extends Component {
     this.setState = {};
   }
   render() {
-    const Header = () => <div className="header"></div>;
     return (
       <div>
-        <Header />
         <Container className="bodyText">
         
           <div className="iconText">

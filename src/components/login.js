@@ -1,4 +1,3 @@
-import "./static/css/login.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -15,6 +14,13 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import IconButton from "@material-ui/core/IconButton";
 
 function Copyright() {
   return (
@@ -66,6 +72,9 @@ export default function SignInSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errStatus, setErrStatus] = useState(false);
+  const [values, setValues] = useState({
+    showPassword: false,
+  });
 
   let users = [];
   let success = false;
@@ -119,6 +128,14 @@ export default function SignInSide() {
     return email.length > 0 && password.length > 0;
   };
 
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Grid container component="main">
       <CssBaseline />
@@ -139,6 +156,7 @@ export default function SignInSide() {
             <TextField
               variant="outlined"
               margin="normal"
+              color="primary"
               required
               fullWidth
               id="email"
@@ -149,23 +167,38 @@ export default function SignInSide() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+
+            <FormControl fullWidth variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                name="password"
+                type={values.showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={70}
+              />
+            </FormControl>
+
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+
             <Button
               type="submit"
               fullWidth
