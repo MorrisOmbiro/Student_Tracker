@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/navbar.component";
@@ -20,15 +20,18 @@ export default function App() {
         <Navbar />
         <div className="container">
         <br />
-        <Route path="/students" exact component={StudentList} />
-        <Route path="/" exact component={LandingPage} />
-        <Route path="/courses" exact component={CourseList} />
-        <Route key="edit-student" exact path="/edit/:id" component={EditStudent} />
-        <Route key="edit-course" exact path="/edit/:id/course" component={EditCourse} />
-        <Route path="/create" component={CreateStudent} />
-        <Route path="/course" component={CreateCourse} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Switch> 
+          <Route path="/students" exact component={StudentList} />
+          <Route path="/" exact component={LandingPage} />
+          <Route path="/courses" exact component={CourseList} />
+          <Route key="edit-student" exact path="/edit/:id" component={EditStudent} />
+          <Route key="edit-course" exact path="/edit/:id/course" component={EditCourse} />
+          <Route path="/create" component={CreateStudent} />
+          <Route path="/course" component={CreateCourse} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="*" component={() => "404 NOT FOUND"} />
+        </Switch>
         </div>
       </div>
     </Router>
