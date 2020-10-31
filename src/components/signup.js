@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -46,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -94,14 +98,16 @@ const SignUp = () => {
     if (!errMessage) {
       // console.log("new user");
       setErrStatus((errStatus) => (errStatus = false));
-      const user = {
+      const newUser = {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
       };
+
+      registerUser(newUser, props.history);
       axios
-        .post("http://localhost:5000/users/add", user)
+        .post("http://localhost:5000/users/add", newUser)
         .then((res) => console.log(res.data));
       window.location = "/login";
     } else {
@@ -219,4 +225,18 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+SignUp.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(SignUp));

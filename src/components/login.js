@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../actions/authActions";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -68,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errStatus, setErrStatus] = useState(false);
@@ -97,13 +101,20 @@ export default function SignInSide() {
 
   // on load, run this
   useEffect(() => {
-    getEmailANDPassword();
+    // getEmailANDPassword();
+    console.log(props.auth.isAuthenticated)
+    
+    if (props.auth.isAuthenticated) {
+      console.log('hi')
+      props.history.push("/dashboard"); // push user to dashboard when they login
+    }
   });
+
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    getEmailANDPassword();
+    // getEmailANDPassword();
 
     for (let i = 0; i < users.length; i++) {
       console.log("users[i].em: " + users[i].em);
@@ -117,7 +128,15 @@ export default function SignInSide() {
 
     if (success) {
       setErrStatus((errStatus) => (errStatus = false));
-      window.location = "/";
+
+      const userData = {
+        email: email,
+        password: password
+      };
+
+      loginUser(userData);
+      
+      // window.location = "/dashboard";
     } else {
       setErrStatus((errStatus) => (errStatus = true));
     }
@@ -230,3 +249,18 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);
