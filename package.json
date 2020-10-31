@@ -17,6 +17,7 @@
     "is-empty": "^1.2.0",
     "jwt-decode": "^3.0.0",
     "particles-bg": "^2.5.0",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.14.0",
