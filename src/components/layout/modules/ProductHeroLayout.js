@@ -1,17 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { withStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Typography from "./Typography";
 
 const styles = (theme) => ({
   root: {
     color: theme.palette.common.white,
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
-      height: '80vh',
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      height: "80vh",
       minHeight: 500,
       maxHeight: 1300,
     },
@@ -19,12 +20,12 @@ const styles = (theme) => ({
   container: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(14),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   backdrop: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
@@ -34,17 +35,22 @@ const styles = (theme) => ({
     zIndex: -1,
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     zIndex: -2,
   },
+  link: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    color: theme.palette.common.white,
+  },
   arrowDown: {
-    position: 'absolute',
+    position: "absolute",
     bottom: theme.spacing(4),
   },
 });
@@ -55,18 +61,15 @@ function ProductHeroLayout(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productHeroWonder.png"
-          alt="wonder"
-          width="147"
-          height="80"
-        />
+        <Typography variant="h5" component="span" className={classes.link}>
+          A.S.L
+        </Typography>
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
         <img
           className={classes.arrowDown}
-          src="/static/themes/onepirate/productHeroArrowDown.png"
+          src="/static/productHeroArrowDown.png"
           height="16"
           width="12"
           alt="arrow down"

@@ -9,7 +9,7 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.secondary.white,
   },
   container: {
     marginTop: theme.spacing(15),
@@ -44,7 +44,7 @@ function ProductValues(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src="/static/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
         />
@@ -53,15 +53,15 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues1.svg"
+                src="/static/calendar.png"
                 alt="suitcase"
               />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+                Manage Your Sessions
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'Use our App to determine how long your sessions were'}
+                {', no more worrying about unpaid sessions you might have forgot to input.'}
               </Typography>
             </div>
           </Grid>
@@ -69,15 +69,15 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues2.svg"
+                src="/static/money.png"
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+                GET PAID ON TIME
               </Typography>
               <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
+                {'Track your hours everyday with simple to use calendar… '}
+                {'Client view enabled with optional reminder.'}
               </Typography>
             </div>
           </Grid>
@@ -85,15 +85,15 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues3.svg"
+                src="/static/people_shared.png"
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+                SHARED STUDENT TRACKING
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'By registering, you will be able to update '}
+                {'the progress of your student with them or their parents.'}
               </Typography>
             </div>
           </Grid>
