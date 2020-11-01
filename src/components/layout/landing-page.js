@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 class Landing extends Component {
   render() {
+    // const classes = useStyles();
+
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
+
+      <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
+              <b>Tutoring</b> just got easier.{" "}
+              <span style={{ fontFamily: "monospace" }}>MONITOR</span> your student's success.
             </h4>
             <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
+              Keep track of tutoring sessions. Get paid on time through shared profiles. 
             </p>
             <br />
             <div className="col s6">
