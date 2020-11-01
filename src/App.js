@@ -7,7 +7,6 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Navbar from "./components/layout/navbar";
 import Landing from "./components/layout/landing-page";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
@@ -39,12 +38,10 @@ export default class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Navbar />
             <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="*" component={() => "404 PAGE NOT FOUND"} />
             </Switch>

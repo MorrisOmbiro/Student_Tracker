@@ -4,6 +4,27 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import MainNavbar from "../layout/modules/MainNavbar";
+import Typography from "../layout/modules/Typography";
+import AppForm from "../layout/modules/AppForm";
+import AppFooter from "../layout/modules/AppFooter";
+import FormButton from "../layout/modules/FormButton";
+import { withStyles } from "@material-ui/core/styles";
+import withRoot from '../layout/modules/withRoot';
+
+const useStyles = (theme) => ({
+  form: {
+    marginTop: theme.spacing(6),
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2),
+  },
+  feedback: {
+    marginTop: theme.spacing(2),
+  },
+});
+
 class Login extends Component {
   constructor() {
     super();
@@ -44,75 +65,96 @@ class Login extends Component {
   };
   render() {
     const { errors } = this.state;
+    const { classes } = this.props;
     return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+      <React.Fragment>
+        <MainNavbar />
+        <AppForm>
+          <React.Fragment>
+            <Typography
+              variant="h0"
+              gutterBottom
+              marked="center"
+              align="center"
+            >
+              <Link to="/" className="btn-flat waves-effect">
+                <i className="material-icons left">keyboard_backspace</i> Back
+                to home
+              </Link>
               <h4>
                 <b>Login</b> below
               </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+            </Typography>
+            <Typography variant="body2" align="center">
+              <p align="center" className="grey-text text-darken-1">
+                Don't have an account?
+                <Link to="/register" underline="always">
+                  {" "}
+                  Register
+                </Link>
               </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound,
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">
-                  {errors.email}
-                  {errors.emailnotfound}
-                </span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect,
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
-                </span>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem",
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            </Typography>
+          </React.Fragment>
+          <div className="container">
+            <div style={{ marginTop: "1rem" }} className="row">
+              <div className="col s8 offset-s0">
+                <form
+                  noValidate
+                  onSubmit={this.onSubmit}
+                  className={classes.form}
                 >
-                  Login
-                </button>
+                  <div className="input-field col s12">
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.email}
+                      error={errors.email}
+                      id="email"
+                      type="email"
+                      className={classnames("", {
+                        invalid: errors.email || errors.emailnotfound,
+                      })}
+                    />
+                    <label htmlFor="email">Email</label>
+                    <span className="red-text">
+                      {errors.email}
+                      {errors.emailnotfound}
+                    </span>
+                  </div>
+                  <div className="input-field col s12">
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.password}
+                      error={errors.password}
+                      id="password"
+                      type="password"
+                      className={classnames("", {
+                        invalid: errors.password || errors.passwordincorrect,
+                      })}
+                    />
+                    <label htmlFor="password">Password</label>
+                    <span className="red-text">
+                      {errors.password}
+                      {errors.passwordincorrect}
+                    </span>
+                  </div>
+                  <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                    <FormButton
+                      className={classes.button}
+                      size="large"
+                      color="secondary"
+                      fullWidth
+                    >
+                      {"Login"}
+                    </FormButton>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
+     
+        </AppForm>
+        <AppFooter />
+      </React.Fragment>
     );
   }
 }
@@ -125,4 +167,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-export default connect(mapStateToProps, { loginUser })(Login);
+
+export default connect(mapStateToProps, { loginUser })(
+  withRoot(withStyles(useStyles)(Login))
+);
