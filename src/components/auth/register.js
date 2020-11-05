@@ -91,7 +91,7 @@ class Register extends Component {
                 Already have an account?
                 <Link to="/login" underline="always">
                   {" "}
-                  Register
+                  Login
                 </Link>
               </p>
             </Typography>
