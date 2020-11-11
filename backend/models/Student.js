@@ -1,4 +1,6 @@
+const { Description } = require("@material-ui/icons");
 const mongoose = require("mongoose");
+const ProgressDescription = require("./ProgressDescription");
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema(
@@ -19,7 +21,7 @@ const StudentSchema = new Schema(
     grade: {
       type: Number,
       required: true,
-    },
+    }
   },
   {
     timestamps: true,

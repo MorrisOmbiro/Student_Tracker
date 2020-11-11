@@ -12,6 +12,7 @@ import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import CreateStudent from "./components/create/create-student";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -42,6 +43,7 @@ export default class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <PrivateRoute exact path="/createStudent" component={CreateStudent} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="*" component={() => "404 PAGE NOT FOUND"} />
             </Switch>
