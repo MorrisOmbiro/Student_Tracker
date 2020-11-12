@@ -18,6 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
       })
     );
 };
+
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
@@ -41,6 +42,10 @@ export const loginUser = userData => dispatch => {
       })
     );
 };
+
+
+
+
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {

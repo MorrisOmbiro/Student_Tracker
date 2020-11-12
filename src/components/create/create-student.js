@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-
+import axios from "axios";
+import { withRouter } from 'react-router-dom'
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import FormButton from "../layout/modules/FormButton";
@@ -38,25 +39,42 @@ function CreateStudent(props) {
   const [lastName, setLastName] = useState("");
   const [grade, setGrade] = useState(0);
 
-  const onSubmit = (e) => {
+  useEffect(() => {
+
+  })
+// add User 
+ const registerStudent = (studentData, history) => {
+    axios.post("/api/students/createStudent", studentData)
+      .then(res => history.push("/dashboard"))
+      .catch(err => console.log(err))
+  }
+
+  const onSubmit = (e, history) => {
     e.preventDefault();
-    setEmail(email);
+
+    const newStudent = {
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      grade: Number(grade),
+    };
+
+    registerStudent(newStudent);
+    history.push("/dashboard")
   };
 
   return (
     <AppBar
-        className={classes.searchBar}
-        position="static"
-        color="default"
-        elevation={0}
-      >
-    <Paper className={classes.paper}>
-      
+      className={classes.searchBar}
+      position="static"
+      color="default"
+      elevation={0}
+    >
+      <Paper className={classes.paper}>
         <React.Fragment>
-          <Typography variant="h0" gutterBottom marked="center" align="center">
+          <Typography variant="h1" gutterBottom marked="center" align="center">
             <Link to="/dashboard" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              Home
+              <i className="material-icons left" style={{color: 'red'}}>backspace</i> <b>CANCEL</b>
             </Link>
           </Typography>
           <Typography align="center" variant="h3" gutterBottom marked="center">
@@ -111,19 +129,19 @@ function CreateStudent(props) {
                   color="secondary"
                   fullWidth
                 >
-                  {"Create New Student"}
+                  {"Create"}
                 </FormButton>
               </div>
             </form>
           </div>
         </div>
-      
-      <div className={classes.CreateStudentWrapper}>
-        <Typography color="textSecondary" align="center">
-          Advanced Stem Learning
-        </Typography>
-      </div>
-    </Paper>
+
+        <div className={classes.CreateStudentWrapper}>
+          <Typography color="textSecondary" align="center">
+            Advanced Stem Learning
+          </Typography>
+        </div>
+      </Paper>
     </AppBar>
   );
 }
@@ -132,4 +150,4 @@ CreateStudent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CreateStudent);
+export default (withStyles(styles)(withRouter(CreateStudent)));
