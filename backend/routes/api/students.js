@@ -1,9 +1,8 @@
 const router = require("express").Router();
 let Student = require("../../models/Student");
 
-
-//Load input validation 
-const validateStudentInput = require("../../validation/student")
+//Load input validation
+const validateStudentInput = require("../../validation/student");
 
 // get all
 router.route("/").get((req, res) => {
@@ -13,27 +12,30 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/createStudent").post((req, res) => {
-
-  const {errors, isValid} = validateStudentInput(req.body);
-  if(!isValid) {
+  const { errors, isValid } = validateStudentInput(req.body);
+  if (!isValid) {
     return res.status(400).json(errors);
   }
-  const email = req.body.email;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const grade = Number(req.body.grade);
 
-  const newStudent = new Student({
-    email,
-    firstName,
-    lastName,
-    grade
+  Student.findOne({ email: req.body.email }).then((student) => {
+    if (student) {
+      return res
+        .status(400)
+        .json({ email: "Student already exists based on email" });
+    } else {
+      const newStudent = new Student({
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        grade: Number(req.body.grade),
+      });
+
+      newStudent
+        .save()
+        .then((student) => res.json("Student Added"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    }
   });
-
-  newStudent
-    .save()
-    .then((student) => res.json("Student Added"))
-    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/:id").get((req, res) => {
@@ -64,5 +66,4 @@ router.route("/update/:id").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-
-module.exports = router; 
+module.exports = router;
