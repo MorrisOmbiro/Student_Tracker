@@ -17,9 +17,6 @@ module.exports = function validateStudentInput(data) {
     if(Validator.isEmpty(data.email)) {
         errors.email = "Email is required";
     }
-    if(Validator.isEmpty(data.grade)) {
-        errors.grade = "Grade is required";
-    }
     return {
         errors,
         isValid: isEmpty(errors)

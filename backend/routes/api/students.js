@@ -1,6 +1,10 @@
 const router = require("express").Router();
 let Student = require("../../models/Student");
 
+
+//Load input validation 
+const validateStudentInput = require("../../validation/student")
+
 // get all
 router.route("/").get((req, res) => {
   Student.find()
@@ -9,6 +13,11 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/createStudent").post((req, res) => {
+
+  const {errors, isValid} = validateStudentInput(req.body);
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
   const email = req.body.email;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;

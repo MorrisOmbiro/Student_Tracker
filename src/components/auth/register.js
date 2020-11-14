@@ -54,6 +54,7 @@ class Register extends Component {
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+  
   onSubmit = (e) => {
     e.preventDefault();
     const newUser = {
@@ -73,7 +74,7 @@ class Register extends Component {
         <AppForm>
         <React.Fragment>
             <Typography
-              variant="h0"
+              variant="h3"
               gutterBottom
               marked="center"
               align="center"
@@ -182,8 +183,8 @@ class Register extends Component {
 }
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.string.isRequired,
-  errors: PropTypes.string.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,

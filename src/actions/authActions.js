@@ -19,6 +19,19 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
+// add Student
+export const registerStudent = (studentData, history) => dispatch => {
+  axios
+    .post("/api/students/createStudent", studentData)
+    .then((res) => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
