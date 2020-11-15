@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios"
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -39,6 +40,13 @@ const styles = (theme) => ({
 
 function Content(props) {
   const { classes } = props;
+  const users = [];
+
+  useEffect(() => {
+    axios.get("/api/students/")
+      .then(res => users.push(res.data))
+      .catch(err => console.log(err))
+  }, [])
 
   return (
     <Paper className={classes.paper}>
@@ -56,7 +64,7 @@ function Content(props) {
             <Grid item xs>
               <TextField
                 fullWidth
-                placeholder="Search by email address or phone number"
+                placeholder="Search Student by Email Address"
                 InputProps={{
                   disableUnderline: true,
                   className: classes.searchInput,
@@ -83,6 +91,7 @@ function Content(props) {
       <div className={classes.contentWrapper}>
         <Typography color="textSecondary" align="center">
           Advanced Stem Learning
+          {users.map(item => (<li key={item.id}>{item.firstName}</li>))}
         </Typography>
       </div>
     </Paper>

@@ -11,7 +11,7 @@ import Header from './Header';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="#999" align="center">
+    <Typography variant="body2" color="initial" align="center">
       {'Copyright © '}
       <Link color="inherit" href="/dashboard">
         AdvancedStemLearning
