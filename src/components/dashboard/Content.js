@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
-import axios from "axios"
-import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
+import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import SearchIcon from "@material-ui/icons/Search";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import StudentTable from "./studentsTable";
 
 const styles = (theme) => ({
   paper: {
@@ -40,13 +39,7 @@ const styles = (theme) => ({
 
 function Content(props) {
   const { classes } = props;
-  const users = [];
-
-  useEffect(() => {
-    axios.get("/api/students/")
-      .then(res => users.push(res.data))
-      .catch(err => console.log(err))
-  }, [])
+  const [students, setStudents] = useState([]);
 
   return (
     <Paper className={classes.paper}>
@@ -89,10 +82,7 @@ function Content(props) {
         </Toolbar>
       </AppBar>
       <div className={classes.contentWrapper}>
-        <Typography color="textSecondary" align="center">
-          Advanced Stem Learning
-          {users.map(item => (<li key={item.id}>{item.firstName}</li>))}
-        </Typography>
+          <StudentTable />
       </div>
     </Paper>
   );
