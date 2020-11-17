@@ -97,6 +97,8 @@ function Navigator(props) {
               <ListItem
                 key={childId}
                 button
+                component="a"
+                href="/dashboard"
                 className={clsx(classes.item, active && classes.itemActiveItem)}
               >
                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>

@@ -8,14 +8,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import {Link} from 'react-router-dom'
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -67,9 +66,11 @@ function Header(props) {
             </Grid>
   
             <Grid item>
+              <Link to="/profile">
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                <Avatar src="" alt="My Avatar" />
               </IconButton>
+              </Link>
             </Grid>
           </Grid>
         </Toolbar>

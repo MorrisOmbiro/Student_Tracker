@@ -74,7 +74,7 @@ class Register extends Component {
         <AppForm>
         <React.Fragment>
             <Typography
-              variant="h3"
+              variant="inherit"
               gutterBottom
               marked="center"
               align="center"
@@ -87,14 +87,12 @@ class Register extends Component {
                 <b>Register</b> below
               </h4>
             </Typography>
-            <Typography variant="body2" align="center">
-              <p align="center" className="grey-text text-darken-1">
+            <Typography variant="body2" align="center" className="grey-text text-darken-1">
                 Already have an account?
                 <Link to="/login" underline="always">
                   {" "}
                   Login
-                </Link>
-              </p>
+                </Link>   
             </Typography>
           </React.Fragment>
         <div className="container">
