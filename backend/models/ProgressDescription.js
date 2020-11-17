@@ -6,7 +6,10 @@ const ProgressDescriptionSchema = new Schema({
         type: String, 
         required: true,
         minlength: 1,
-    }, 
+    },created: {
+        type: Date,
+        default: Date.now
+    } 
 }, {
     timestamps: true,
 })
