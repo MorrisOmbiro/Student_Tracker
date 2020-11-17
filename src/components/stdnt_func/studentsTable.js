@@ -8,17 +8,15 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
-function createData(email, FirstName, LastName, Grade) {
-  return { email, FirstName, LastName, Grade };
-}
 
 export default function AcccessibleTable() {
   const classes = useStyles();
@@ -29,14 +27,14 @@ export default function AcccessibleTable() {
       setStudents(students);
     });
   }, []);
-  
-  const deleteStudent = (id) => {
-      axios.delete("/api/students/" + id)
-      .then(res => console.log(res.data))
 
-      //return all elements not equal to id we just removed 
-      setStudents(students.filter(el => el._id !== id))
-  }
+  const deleteStudent = (id) => {
+    axios.delete("/api/students/" + id).then((res) => console.log(res.data));
+
+    //return all elements not equal to id we just removed
+    setStudents(students.filter((el) => el._id !== id));
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table classemail={classes.table} aria-label="caption table">
@@ -52,13 +50,21 @@ export default function AcccessibleTable() {
         </TableHead>
         <TableBody>
           {students.map((stdnt) => (
-            <TableRow key={stdnt.id}>
+            <TableRow key={stdnt._id}>
               <TableCell>{stdnt.firstName}</TableCell>
               <TableCell>{stdnt.lastName}</TableCell>
               <TableCell>{stdnt.email}</TableCell>
               <TableCell>{stdnt.grade}</TableCell>
               <TableCell>
-                <Link to={"/editStudent/" + stdnt._id}>edit</Link> | <a href="#" onClick={() => deleteStudent(stdnt._id)}>delete</a>
+                <Link to={"/editStudent/" + stdnt._id}>edit</Link> |{" "}
+                <IconButton
+                  onClick={() => deleteStudent(stdnt._id)}
+                  aria-label="delete"
+                  className={classes.margin}
+                  color='inherit'
+                >
+                  <DeleteIcon fontSize="small"/>
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}

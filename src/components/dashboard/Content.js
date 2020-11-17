@@ -10,9 +10,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import SearchIcon from "@material-ui/icons/Search";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import StudentTable from "./studentsTable";
+import StudentTable from "../stdnt_func/studentsTable";
 
 const styles = (theme) => ({
   paper: {
@@ -39,7 +39,6 @@ const styles = (theme) => ({
 
 function Content(props) {
   const { classes } = props;
-  const [students, setStudents] = useState([]);
 
   return (
     <Paper className={classes.paper}>

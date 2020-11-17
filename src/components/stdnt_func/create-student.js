@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Paper from "@material-ui/core/Paper";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import axios from "axios";
-import classnames from "classnames";
 import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import { registerStudent } from "../../actions/authActions";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import FormButton from "../layout/modules/FormButton";
-import { updatedStudent, updateStudent } from "../../actions/authActions";
 
 const styles = (theme) => ({
   paper: {
@@ -34,30 +34,16 @@ const styles = (theme) => ({
   },
 });
 
-class EditStudent extends Component {
+class CreateStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       firstName: "",
       lastName: "",
-      grade: Number(0),
+      grade: 0,
       errors: {},
     };
-  }
-
-  componentDidMount() {
-    axios
-      .get("/api/students/" + this.props.match.params.id)
-      .then((response) => {
-        this.setState({
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          grade: Number(response.data.grade),
-        });
-      })
-      .catch((err) => console.log(err));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,19 +59,21 @@ class EditStudent extends Component {
   };
 
   onSubmit = (e, history) => {
-    const updatedStudent = {
+    e.preventDefault();
+
+    const newStudent = {
       email: this.state.email,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      grade: Number(this.state.grade),
+      grade: this.state.grade,
     };
 
-    this.props.updateStudent(updatedStudent, this.props.history)
+    this.props.registerStudent(newStudent, this.props.history);
   };
 
   render() {
     const { classes } = this.props;
-    const { errors, email, firstName, lastName, grade } = this.state;
+    const { errors, email, firstName, lastName } = this.state;
 
     return (
       <AppBar
@@ -116,17 +104,13 @@ class EditStudent extends Component {
               marked="center"
             >
               <p align="center" className="grey-text text-darken-1">
-                <b>Edit</b> Student
+                <b>Create</b> Student
               </p>
             </Typography>
           </React.Fragment>
           <div className="container">
             <div style={{ marginTop: "1rem" }} className="row">
-              <form
-                noValidate
-                onSubmit={this.onSubmit}
-                className={classes.form}
-              >
+              <form noValidate onSubmit={this.onSubmit} className={classes.form}>
                 <div className="input-field col s12">
                   <input
                     onChange={this.onChange}
@@ -180,7 +164,7 @@ class EditStudent extends Component {
                     color="secondary"
                     fullWidth
                   >
-                    {"Update"}
+                    {"Create"}
                   </FormButton>
                 </div>
               </form>
@@ -198,16 +182,16 @@ class EditStudent extends Component {
   }
 }
 
-EditStudent.propTypes = {
+CreateStudent.propTypes = {
   classes: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  editStudent: PropTypes.func.isRequired,
+  registerStudent: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return { errors: state.errors };
 }
 
-export default connect(mapStateToProps, {updateStudent})(
-  withStyles(styles)(withRouter(EditStudent))
+export default connect(mapStateToProps, { registerStudent })(
+  withStyles(styles)(withRouter(CreateStudent))
 );

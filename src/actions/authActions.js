@@ -6,7 +6,7 @@ import {
   SET_CURRENT_USER,
   USER_LOADING
 } from "./types";
-import { propTypes } from "react-bootstrap/esm/Image";
+
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
@@ -33,8 +33,8 @@ export const registerStudent = (studentData, history) => dispatch => {
     );
 };
 
-export const updateStudent = (studentData, history) => dispatch => {
-  axios.post("/api/students/id?=${id}", studentData)
+export const updateStudent = (studentData, history, id) => dispatch => {
+  axios.post("/api/students/update/" + id, studentData)
   .then((res) => history.push("/dashboard"))
   .catch(err => 
     dispatch({

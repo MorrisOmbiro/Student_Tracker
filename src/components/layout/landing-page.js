@@ -1,15 +1,13 @@
   
-import withRoot from './modules/withRoot';
 // --- Post bootstrap -----
 import React from 'react';
-import ProductCategories from './modules/ProductCategories';
-import ProductSmokingHero from './modules/ProductSmokingHero';
 import AppFooter from './modules/AppFooter';
-import ProductHero from './modules/ProductHero';
-import ProductValues from './modules/ProductValues';
-import ProductHowItWorks from './modules/ProductHowItWorks';
-import ProductCTA from './modules/ProductCTA';
 import AppAppBar from './modules/MainNavbar';
+import ProductHero from './modules/ProductHero';
+import ProductHowItWorks from './modules/ProductHowItWorks';
+import ProductSmokingHero from './modules/ProductSmokingHero';
+import ProductValues from './modules/ProductValues';
+import withRoot from './modules/withRoot';
 
 function Index() {
   return (

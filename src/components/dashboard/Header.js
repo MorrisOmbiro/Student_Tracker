@@ -43,7 +43,7 @@ const styles = (theme) => ({
 
 function Header(props) {
   const { classes, onDrawerToggle, logoutUser } = props;
-  const { user } = props.auth;
+  // const { user } = props.auth;
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -65,13 +65,7 @@ function Header(props) {
             <Grid item>
               <Button onClick={logoutUser} size="large">Logout</Button>
             </Grid>
-            <Grid item>
-              <Tooltip title="Alerts • No alerts">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
+  
             <Grid item>
               <IconButton color="inherit" className={classes.iconButtonAvatar}>
                 <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />

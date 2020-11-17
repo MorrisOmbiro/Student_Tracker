@@ -12,8 +12,8 @@ import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import CreateStudent from "./components/create/create-student";
-import EditStudent from "./components/dashboard/editStudent";
+import CreateStudent from "./components/stdnt_func/create-student";
+import EditStudent from "./components/stdnt_func/editStudent";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
