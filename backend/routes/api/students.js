@@ -28,6 +28,7 @@ router.route("/createStudent").post((req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         grade: Number(req.body.grade),
+        user_id: req.body.user_id,
       });
 
       newStudent

@@ -42,8 +42,17 @@ class CreateStudent extends Component {
       firstName: "",
       lastName: "",
       grade: 0,
+      user_id: "",
       errors: {},
     };
+  }
+
+  componentDidMount() {
+    const { user } = this.props.auth;
+
+    this.setState({
+      user_id: user.id,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,6 +75,7 @@ class CreateStudent extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       grade: this.state.grade,
+      user_id: this.state.user_id,
     };
 
     this.props.registerStudent(newStudent, this.props.history);
@@ -110,7 +120,11 @@ class CreateStudent extends Component {
           </React.Fragment>
           <div className="container">
             <div style={{ marginTop: "1rem" }} className="row">
-              <form noValidate onSubmit={this.onSubmit} className={classes.form}>
+              <form
+                noValidate
+                onSubmit={this.onSubmit}
+                className={classes.form}
+              >
                 <div className="input-field col s12">
                   <input
                     onChange={this.onChange}
@@ -186,10 +200,11 @@ CreateStudent.propTypes = {
   classes: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   registerStudent: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
-  return { errors: state.errors };
+  return { errors: state.errors, auth: state.auth };
 }
 
 export default connect(mapStateToProps, { registerStudent })(

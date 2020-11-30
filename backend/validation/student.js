@@ -12,8 +12,14 @@ module.exports = function validateStudentInput(data) {
     if(Validator.isEmpty(data.firstName)) {
         errors.firstName = "First Name is required";
     }
+    if(data.firstName.length < 4) {
+        errors.firstName = "First Name needs at least 4 chars."
+    }
     if(Validator.isEmpty(data.lastName)) {
         errors.lastName = "Last Name is required";
+    }
+    if(data.lastName.length < 4) {
+        errors.lastName = "Last Name needs at least 4 chars."
     }
     if(Validator.isEmpty(data.email)) {
         errors.email = "Email is required";
