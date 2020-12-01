@@ -4,11 +4,21 @@ let Student = require("../../models/Student");
 //Load input validation
 const validateStudentInput = require("../../validation/student");
 
-// get all
+// get all + query selector
 router.route("/").get((req, res) => {
-  Student.find()
-    .then((students) => res.json(students))
-    .catch((err) => res.status(400).json("Error: " + err));
+  if (!req.query.user_id) {
+    Student.find()
+      .then((students) => res.json(students))
+      .catch((err) => res.status(400).json("Error: " + err));
+  } else {
+    Student.find()
+      .then((students) =>
+        res.send(
+          students.filter((stdnt) => stdnt.user_id === req.query.user_id)
+        )
+      )
+      .catch((err) => res.status(400).json("Error: " + err));
+  }
 });
 
 router.route("/createStudent").post((req, res) => {

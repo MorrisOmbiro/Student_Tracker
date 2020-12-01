@@ -8,9 +8,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   table: {
@@ -18,15 +22,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AcccessibleTable() {
+function AccessibleTable(props) {
   const classes = useStyles();
   const [students, setStudents] = useState([]);
-
+  const {user} = props.auth;
   useEffect(() => {
-    axios.get("/api/students/").then(({ data: students }) => {
+    axios.get("/api/students?user_id=" + user.id).then(({ data: students }) => {
       setStudents(students);
     });
-  }, []);
+  }, [user.id]);
 
   const deleteStudent = (id) => {
     axios.delete("/api/students/" + id).then((res) => console.log(res.data));
@@ -73,3 +77,17 @@ export default function AcccessibleTable() {
     </TableContainer>
   );
 }
+
+
+AccessibleTable.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)
+ (withRouter(AccessibleTable)
+);
+
